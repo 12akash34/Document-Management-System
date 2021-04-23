@@ -1,0 +1,117 @@
+.dropdown-menu{
+    background-color: #ff944d;
+}
+.navbar .bi{
+    color: #ff944d;
+    font-size: 20px;
+        text-shadow: 1px 1px 1px #000000;
+}
+.row-header{
+margin: 0px auto;
+padding: 0px auto;
+}
+.row-content{
+margin: 0px auto;
+padding: 50px 0px 50px 0px;
+border-bottom: 1px ridge;
+min-height: 400px;
+}
+.jumbotron{
+padding: 40px 20px;
+margin: 0px;
+background: #ff944d;
+color: floralwhite;
+}
+.address{
+font-size: 80%;
+margin: 0px;
+color: #0f0f0f;
+}
+body{
+  padding: 0px 0px 0px 0px;
+}
+
+.media img{
+  height: 50%;
+  width: 50%;
+}
+.navbar-dark{
+  background-color: #cc5200;
+}
+.tab-content{
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+.carousel{
+  background: #512DA8;
+}
+.carousel-item{
+ height: 300px; 
+}
+.carousel-item img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 300px;
+}
+#carouselButton{
+  right: 0px;
+  position: absolute;
+  bottom: 0px;
+  z-index: 1;
+}
+.modal-body {
+  background: #D1C4E9;
+}
+.modal-header .close {
+  color: floralwhite;
+}
+.modal-header .modal-title {
+  color: floralwhite;
+}
+.address {
+      color: #724acf;
+      font: 400 0.875rem/1.375rem "Open Sans", sans-serif;
+      text-shadow: 0px 1px 1px #ffffff;
+    }
+    .footer p {
+      color: #724acf;
+      font: 400 0.875rem/1.375rem "Open Sans", sans-serif;
+      text-shadow: 0px 1px 1px #ffffff;
+    }
+    .footer {
+      padding-top: 1rem;
+      background-color: #ff944d;
+
+    }
+    .footer h4 {
+      text-shadow: 1px 1px 1px #ffffff;
+      margin-bottom: 1rem;
+      color: #724acf;
+      font: 700 1.375rem/1.75rem "Montserrat", sans-serif;
+    }
+   .footer  .bi {
+  padding: 5px 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-size: 25px;
+  width: 36px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 18px;
+  text-shadow: 1px 1px 4px #ffffff;
+}
+.bi:hover {
+  color: #00c9db;
+}
+#copyright {
+	
+	background-color: #ff751a;
+	text-align: center;
+}
+#copyright .p-small {
+	color: #f1f1f8;
+	opacity: 0.8;
+}
