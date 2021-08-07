@@ -104,10 +104,11 @@
               <div class="form-group">
                   
                   <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="user" id="student" value="student" checked><label for="student"> Student </label>
-                  <input class="form-check-input" type="radio" name="user" id="faculty" value="faculty"><label for="faculty"> Faculty</label>
+                  <input class="form-check-input" type="radio" name="user" id="student" value="student" onchange="show(this.value)" checked="checked"><label for="student"> Student </label>
+                  <input class="form-check-input" type="radio" name="user" id="faculty" value="faculty" onchange="show2()"><label for="faculty"> Faculty</label>
               
-                  </div></div>
+                  </div></div></div>
+              <div class="form-row">
               <div class="form-group px-1">
                 <label for="fn">First Name</label>
                 <input type="text" class="form-control form-control-sm mr-1" id="fn" name="fn" required>
@@ -132,7 +133,7 @@
               </div>
               <div class="form-group px-1">
                 <label for="eid">Email</label>
-                <input type="email" class="form-control form-control-sm mr-1" id="eid" name="eid" required>
+                <input type="email" class="form-control form-control-sm mr-1" id="eid" name="eid">
               </div>
               <div class="form-group px-1">
                 <label for="city">City</label>
@@ -142,9 +143,11 @@
                 <label for="phone">Mobile</label>
                 <input type="number" class="form-control form-control-sm mr-1" id="phone" name="phone">
               </div>
+            </div>
+                <div class="form-row" id="stu">
               <div class="form-group px-1">
                 <label for="branch">Branch</label>
-                <select class="form-control" id="branch" name="branch">
+                <select class="form-control px-1" id="branch" name="branch">
     <option value="CMPN">CMPN</option>
     <option value="INFT">INFT</option>
     <option value="EXTC">EXTC</option>
@@ -152,8 +155,28 @@
     <option value="BIOM">BIOM</option>
     <option value="MMS">MMS</option>
   </select>
-              </div>  
+              </div> 
+              <div class="form-group px-1">
+                <label for="batch">Batch year</label>
+                <input type="number" class="form-control form-control-sm mr-1" id="batch" name="batch" min="2001" value="2020" required>
+              </div>
             </div>
+              <div class="form-row" id="fac" style="display: none;">
+                  <div class="form-group">
+                      <label for="dom">Domains <small class="text-muted">(Use Ctrl button or drag mouse to select multiple)</small></label>
+                      <select class="form-control px-1" name="dom" multiple>
+                                                <%  Class.forName("com.mysql.jdbc.Driver");
+	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/"+"docSpace","root","");
+	Statement st=con.createStatement();
+                                                    ResultSet rs=st.executeQuery("select domain_n from domain");
+                                                while(rs.next()){
+                                                    %>
+                                               
+                                                <option value="<%=rs.getString("domain_n") %>"><% out.print(rs.getString("domain_n")); %></option>
+                                            <% } %>
+                                            </select>
+                  </div>
+              </div>
               <p style="color: red">
          <%
             if(request.getParameter("msg")!=null)
@@ -174,5 +197,15 @@
             <script src="bootstrap/jquery/dist/jquery.slim.min.js"></script>
   <script src="bootstrap/popper.js/dist/popper.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+            function show(str){
+                document.getElementById('fac').style.display = 'none';
+                document.getElementById('stu').style.display = 'block';
+            }
+            function show2(sign){
+                document.getElementById('fac').style.display = 'block';
+                document.getElementById('stu').style.display = 'none';
+            }
+        </script>
 </body>
 </html>

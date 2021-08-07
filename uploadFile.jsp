@@ -49,6 +49,7 @@
 		int version=(Integer)session.getAttribute("version");
 		String des=(String)session.getAttribute("descrip");
 		String approver=(String)session.getAttribute("faculty");
+                String dom=(String)session.getAttribute("domain");
 		
 		saveFile=uid+docname+version+saveFile;
 		Class.forName("com.mysql.jdbc.Driver");
@@ -58,7 +59,11 @@
             Statement st1=con.createStatement();
 		Statement st2=con.createStatement();
 		Statement st3=con.createStatement();
-		Statement st4=con.createStatement();	
+		Statement st4=con.createStatement();
+                Statement st5=con.createStatement();
+                ResultSet rs9=st5.executeQuery("select branch from student where s_id='"+uid+"'");
+                rs9.next();
+                String branch=rs9.getString("branch");
 		// creating a new file with the same name and writing the content in new file
 			ResultSet rs=st1.executeQuery("select docname,version from documentload where author='"+uid+"'");
 		String s=docname+version;
@@ -82,7 +87,18 @@
 				fileOut.write(dataBytes, startPos, (endPos - startPos));
 				fileOut.flush();
 				fileOut.close();
-				st1.executeUpdate("insert into documentload(`docname`, `description`, `version`, `author`, `size`, `createdon`, `status`, `filepath`) values('"+docname+"','"+des+"','"+version+"','"+uid+"','"+formDataLength+"','"+f.format(s1) +"','created','"+saveFile+"')");
+				PreparedStatement pst=con.prepareStatement("insert into documentload(`docname`, `description`, `version`, `author`, `size`, `createdon`, `status`, `filepath`, `domain_doc`,`branch`) values(?,?,?,?,?,?,?,?,?,?)");
+                                pst.setString(1,docname);
+        pst.setString(2,des);
+        pst.setInt(3,version);
+        pst.setString(4,uid);
+        pst.setInt(5,formDataLength);
+        pst.setString(6,f.format(s1));
+        pst.setString(7,"created");
+        pst.setString(8,filePath);
+        pst.setString(9,dom);
+        pst.setString(10,branch);
+int y=pst.executeUpdate();
                                
 				ResultSet rs1=st2.executeQuery("select docid from documentload where docname='"+docname+"' and version='"+version+"' and author='"+uid+"'");
 				rs1.next();

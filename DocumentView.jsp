@@ -54,7 +54,7 @@
 			%>
 			<tr>
 				<td><input type="checkbox" name="mine" value="<%=rs1.getString("docid")%>">
-				<a href="DownloadFile.jsp?path=C:\docSpace\<%=rs1.getString("filepath")%>"><%=rs1.getString("docname")%></a></td>
+				<a href="DownloadFile.jsp?path=<%=rs1.getString("filepath")%>"><%=rs1.getString("docname")%></a></td>
 				<td><%=rs1.getString("author")%></td>
 				<td><%=rs1.getString("description")%></td>
 				<td><%=rs1.getString("docid")%></td>

@@ -24,6 +24,7 @@ Class.forName("com.mysql.jdbc.Driver");
 Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/"+"docspace","root","");
 Statement st2=con.createStatement();
 Statement st3=con.createStatement();
+Statement st4=con.createStatement();
 %>
 
 <div class="container-fluid">
@@ -55,7 +56,7 @@ Statement st3=con.createStatement();
 
               <div class="form-group px-1">
                 <label for="eid">Version</label>
-                <input type="number" class="form-control form-control-sm mr-1" id="eid" name="ver" required>
+                <input type="number" class="form-control form-control-sm mr-1" id="eid" name="ver" min="1" value="1" required>
               </div>
               
               <div class="form-group px-1">
@@ -69,7 +70,19 @@ Statement st3=con.createStatement();
                                                  }
                                              %>
                                          </select>
-              </div>  
+              </div>
+                  <div class="form-group px-1">
+                <label for="dom">Domain</label>
+                <select class="form-control" name="dom" id="dom">
+                                             <% ResultSet rs4=st4.executeQuery("select domain_n from domain");
+                                             while(rs4.next()){
+                                                 %>
+                                                 <option value="<%=rs4.getString("domain_n")%>"><% out.print(rs4.getString("domain_n")); %></option>
+                                             <%
+                                                 }
+                                             %>
+                                         </select>
+              </div>                         
             </div>
               <p style="color: red">
          <%

@@ -24,11 +24,9 @@ String ds=request.getParameter("s");
         else if(ds.equals("forward")){
 String forwardto=request.getParameter("user");
 
-	int mlength=(Integer)session.getAttribute("mlength");
-	
-		for(int i=0;i<mlength;i++)
-		{	String s=(String)session.getAttribute("m"+i);
-			ResultSet rs=st.executeQuery("select * from message where mid='"+s+"'");
+		for(int i=0;i<mid.length;i++)
+		{	
+			ResultSet rs=st.executeQuery("select * from message where mid='"+mid[i]+"'");
 			rs.next();
 			st.executeUpdate("insert into message (sender,receiver,sub,msg) values('"+uid+"','"+forwardto+"','"+rs.getString("sub")+"','"+rs.getString("msg")+"')");	
 		}

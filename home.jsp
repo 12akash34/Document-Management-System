@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/tree.css">
-   
+   <link rel="stylesheet" href="icons/font/bootstrap-icons.css">
     <script type="text/javascript">
 	function ds(){
 		sr=document.forms[0].srch.value;
@@ -19,69 +19,53 @@
  </script>
 </head>
 <body>
- <%@ include file="header.jsp" %>
- <%
+    <%@ include file="header.jsp" %>
+     <div class="container-fluid">
+    <%
 	Class.forName("com.mysql.jdbc.Driver");
 	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/"+"docSpace","root","");
 	Statement st=con.createStatement();
         Statement st1=con.createStatement();
+        Statement st2=con.createStatement();
+        Statement st3=con.createStatement();
 
         %>
- <div class="container-fluid">
+        
+       
      <div class="row">
-         <div class="col col-sm-3 pt-3" style="background-color: #ffe4b3;">
+         <div class="col col-sm-3 py-3" style="background-color: #ffe4b3;">
              <ul id="myUL">
-         
-  <li><span class="caret">AI</span>
+                 <% ResultSet rs3=st2.executeQuery("select * from domain");
+                 while(rs3.next()){
+                     %>
+                 
+                 
+  <li><span class="caret"><%=rs3.getString("domain_n")%></span>
     <ul class="nested">
-      <li>doc</li>
-      <li>doc</li>
+        <% ResultSet rs4=st3.executeQuery("SELECT docname FROM `documentload` WHERE domain_doc='"+rs3.getString("domain_n")+"' and docid in (select docid from approval where documentload.docid=approval.docid and status='approved')");
+        while(rs4.next()){
+        %>
+        <li><%=rs4.getString("docname")%></li>
+     <% } %>
     </ul>
   </li>
-  <li><span class="caret">Blockchain</span>
-        <ul class="nested">
-          <li>doc</li>
-          <li>doc</li>
-        </ul>
-      </li>
-   <li><span class="caret">Bigdata</span>
-            <ul class="nested">
-              <li>doc</li>
-              <li>doc</li>
-              <li>doc</li>
-              <li>doc</li>
-            </ul>
-          </li>
-    <li><span class="caret">IOT</span>
-            <ul class="nested">
-              <li>doc</li>
-              <li>doc</li>
-              <li>doc</li>
-              <li>doc</li>
-            </ul>
-          </li>
-      <li><span class="caret">Web Development</span>
-            <ul class="nested">
-              <li>doc</li>
-              <li>doc</li>
-              <li>doc</li>
-              <li>doc</li>
-            </ul>
-          </li>
-</ul>
-         </div>
+  <% } %>
+    </ul>
+  </li>
+             </ul>
+             </div>
          <div class="col col-sm-9">
              
              <div class="table-responsive">
-		<table class="table table-striped table-bordered table-hover table-warning" align="center">
+                 <table class="table table-striped table-bordered table-hover table-warning" align="center">
 		<thead class="bg-success">
                     <tr>
-				<th>document name</th>
-				<th>description</th>
-				<th>created on</th>
-				<th>version</th>
-				<th>size(bytes)</th>
-                                <th>author</th>
+				<th>Doc Name</th>
+				<th>Info</th>
+				<th>Created on</th>
+                                <th>Author</th>
+                                <th>Approved by</th>
+                                <th>Domain</th>
 			</tr>
                 </thead>
 			<%	
@@ -91,32 +75,27 @@
 				rs2.next();
 			%>
 			<tr>
-				<td><input type="checkbox" name="mine" value="<%=rs1.getString("docid")%>">
-				<a href="DownloadFile.jsp?path=C:\docSpace\<%=rs2.getString("filepath")%>"><%=rs2.getString("docname")%></a></td>
+				<td>
+				<a href="DownloadFile.jsp?path=<%=rs2.getString("filepath")%>"><%=rs2.getString("docname")%></a></td>
 				<td><%=rs2.getString("description")%></td>
 				<td><%=rs2.getString("createdon")%></td>
-				<td><%=rs2.getString("version")%></td>
-				<td><%=rs2.getString("size")%></td>
                                 <td><%=rs1.getString("author")%></td>
-                        <tr>
-                            <% } %>
-                            <td>
-					<input type="submit" value="delete" name="s" >
-					
-					
-				</td>
-			</tr>
+                                <td><%=rs1.getString("approvalby")%></td>
+                                <td><%=rs2.getString("domain_doc")%></td>
+                       		</tr>
+                                <% } %>	
                 </table>
-                    </div>
+                 
+                 </div>
          
          </div>
      </div>
  </div>
- <%@ include file="footer.jsp" %>
+    <%@ include file="footer.jsp" %>
 <script src="bootstrap/jquery/dist/jquery.slim.min.js"></script>
   <script src="bootstrap/popper.js/dist/popper.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
-  <script>
+   <script>
       var toggler = document.getElementsByClassName("caret");
 var i;
 

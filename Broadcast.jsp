@@ -69,10 +69,17 @@
 			
 %>		
 		</table>
-                        Subject:<input align="center" type="text" name="sub" size="50">
+       
+                   
+                        <div class="form-group mb-3">
+                            <label for="sub">Subject :</label><input class="form-control" align="center" type="text" id="sub" name="sub" size="50">
 			
-			<textarea alihn="center" rows="6" cols="70" name="msg"></textarea>
-					<input type="submit" value="send">
+			<textarea class="form-control" align="center" rows="6" cols="70" name="msg"></textarea>
+                        </div>
+                        <div class="form-group mt-3">
+                        <button class="btn btn-primary btn-sm ml-1" type="submit" value="send">Send</button>
+                        </div>
+                    
 				
 		
 	</form>

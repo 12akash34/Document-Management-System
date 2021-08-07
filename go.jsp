@@ -1,4 +1,4 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8"  import="java.sql.*"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"  import="java.sql.*,java.util.Date,java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,12 +22,16 @@
  <div class="container-fluid">
      <%
 	String s=request.getParameter("srch");
+        String from=request.getParameter("from");
+        String to=request.getParameter("to");
+       
+        String branch=request.getParameter("branch");
+        String domain=request.getParameter("domain");
 	Class.forName("com.mysql.jdbc.Driver");
-	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/"+"docSpace","root","");
+        Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/"+"docSpace","root","");
 	Statement st2=con.createStatement();
 	Statement st3=con.createStatement();
 	String us=request.getParameter("st");
-
 %>
 <table class="table table-striped table-bordered table-hover table-warning" align="center" border="1">
 <thead class="bg-success">	
@@ -41,14 +45,14 @@
 </thead>
 <%
 	if(us.equals("in")){
-		ResultSet rs1=st2.executeQuery("select * from documentload where status !='deleted' and author='"+uid+"'");
+		ResultSet rs1=st2.executeQuery("select * from documentload where status!='deleted' and author='"+uid+"'");
 		String d[]=s.split(" ");
 		while(rs1.next()){
 			String k=rs1.getString("docname");
 			for(int i=0;i<d.length;i++){
 				if(k.startsWith(d[i])){
 %>					<tr>	
-						<td><a href="c:\docSpace\<%=rs1.getString("filepath")%>"><%=k%></a></td>
+						<td><a href="<%=rs1.getString("filepath")%>"><%=k%></a></td>
 						<td><%=rs1.getString("description")%></td>
 						<td><%=rs1.getString("docid")%></td>	
 						<td><%=rs1.getString("author") %></td>
@@ -60,10 +64,11 @@
 			
 			}
 		}
-		ResultSet rs3=st3.executeQuery("select * from documentshared where status !='deleted' and sharedto='"+uid+"'");
-		while(rs3.next()){
+		ResultSet rs3=st3.executeQuery("select * from documentshared where sharedto='"+uid+"'");
+	if(rs3.next()){	
+while(rs3.next()){
 			ResultSet rs2=st2.executeQuery("select * from documentload where docid='"+rs3.getString("docid")+"'");
-			rs2.next();	
+			if(rs2.next()){
 			String k=rs2.getString("docname");
 			for(int i=0;i<d.length;i++){
 				if(k.startsWith(d[i])){
@@ -78,12 +83,26 @@
 <%				}
 			
 			}
+}
 		}
-		
+}
 	}
 else{
-		ResultSet rs1=st2.executeQuery("select * from documentload where status !='deleted' and author!='"+uid+"'");
-		String d[]=s.split(" ");
+ResultSet rs1=null;
+ if(domain!=null&&branch!=null)	{
+rs1=st2.executeQuery("select * from documentload where status !='deleted' and author!='"+uid+"' and domain_doc='"+domain+"' and branch='"+branch+"' and createdon between '"+from+"-00-00' and '"+to+"-00-00'");
+}
+else if(domain!=null){
+rs1=st2.executeQuery("select * from documentload where status !='deleted' and author!='"+uid+"' and domain_doc='"+domain+"' and createdon between '"+from+"-00-00' and '"+to+"-00-00'");
+}
+else if(branch!=null) {
+rs1=st2.executeQuery("select * from documentload where status !='deleted' and author!='"+uid+"' and branch='"+branch+"' and createdon between '"+from+"-00-00' and '"+to+"-00-00'");
+}
+ else {
+rs1=st2.executeQuery("select * from documentload where status !='deleted' and author!='"+uid+"' and createdon between '"+from+"-00-00' and '"+to+"-00-00'");
+}
+
+String d[]=s.split(" ");
 		while(rs1.next()){
 			String k=rs1.getString("docname");
 			for(int i=0;i<d.length;i++){
@@ -102,10 +121,11 @@ else{
 				
 			}
 		}
-		ResultSet rs3=st3.executeQuery("select * from documentshared where status !='deleted' and sharedto!='"+uid+"'");
+		ResultSet rs3=st3.executeQuery("select * from documentshared where sharedto!='"+uid+"'");
+if(rs3.next()){
 		while(rs3.next()){
 			ResultSet rs2=st2.executeQuery("select * from documentload where docid='"+rs3.getString("docid")+"'");
-			rs2.next();	
+			if(rs2.next()){
 			String k=rs2.getString("docname");
 			for(int i=0;i<d.length;i++){
 					if(d[i].startsWith(k)){
@@ -128,7 +148,9 @@ else{
 					
 <%					}
 			}
+}
 		}
+}
 	}
 %>
 </table>

@@ -43,7 +43,7 @@ ResultSet rs=st.executeQuery("select * from message where sender='"+uid+"' and s
 %>
 	<tr>
 			<td><input type="checkbox" name="mid" value="<%=rs.getString("mid")%>"><%=rs.getString("sub") %></td>
-			<td><%=rs.getString("msg")%></td>
+			<td width="200px"><div style="overflow:auto; width:200px"><%=rs.getString("msg")%></div></td>
 			<td><%=rs.getString("receiver")%></td>
                         <td><%=rs.getString("sent_on")%></td>
 		</tr>			

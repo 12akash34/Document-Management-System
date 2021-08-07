@@ -56,7 +56,7 @@ if(z){
 	while(z){
 		%>
 		<tr>
-			<td><input type="checkbox" name="docs" value="<%=rs.getString("docid")%>"><%=rs.getString("docname")%></td>
+                    <td><input type="checkbox" name="docs" value="<%=rs.getString("docid")%>"><a href="DownloadFile.jsp?path=<%=rs.getString("filepath")%>"><%=rs.getString("docname")%></a></td>
 			<td><%=rs.getString("docid") %></td>
 			<td><%=rs.getString("author") %></td>
 			<td><%= rs.getString("size")%></td>

@@ -13,8 +13,16 @@
  <ul class="nav justify-content-center bg-primary ">
    <li class="nav-item active"><a style="color: white;" class="nav-link" href="index.jsp"><span class="bi bi-house-door"></span> Home</a></li>
    <li class="nav-item"><a style="color: white;" class="nav-link" href="#about"><span class="bi bi-info-circle"></span> About us</a></li>
+   <% if(session.getAttribute("login_user1")!=null||session.getAttribute("login_user2")!=null){
+       %>
+   <li class="nav-item"><a style="color: white;" class="nav-link" href="logout.jsp"><span class="bi bi-power"></span> Logout</a></li>
+   <%
+   }
+else {
+%>
    <li class="nav-item"><a style="color: white;" class="nav-link" href="reg.jsp"><span class="bi bi-person-plus"></span> Register</a></li>
-   <li class="nav-item"><a style="color: white;" class="nav-link" href="#login"><span class="bi bi-box-arrow-in-right"></span> Login</a></li>	
+   <li class="nav-item"><a style="color: white;" class="nav-link" href="#login"><span class="bi bi-box-arrow-in-right"></span> Login</a></li>
+   <% } %>
  </ul>      
     <header class="jumbotron p-0">
         <div class="container-fluid" id="head">
@@ -23,9 +31,9 @@
                   <img src="img/document.png" class="img-fluid">
                 </div>
                 <div class="col-12 col-sm-8 align-self-center">
-                    <h1>DOCUMENT MANAGEMENT SYSTEM</h1>
-                    <h3>WE SECURE YOUR DOCUMENTS</h3>
-                    <p>Welcome</p>
+                    <h1 style="text-align:center">DOCUMENT MANAGEMENT SYSTEM</h1>
+                    <h3 style="text-align:center">WE SECURE YOUR DOCUMENTS</h3>
+                    <p style="text-align:center">WELCOME !</p>
                 </div>
                 
             </div>
@@ -35,12 +43,14 @@
     <div id="about" class="container-fluid">
         <div class="row row-content">
             <div class="col-12 col-sm-8" style="text-align: center;">
-            <p><b>Online Document Management System</b> solution streamlines your document management processes. Secure online file storage capabilities let you store and organize documents online and access them where ever you are. You can share documents online and collaborate on them with colleagues, students and partners. Online document management and document collaboration let you store, organize, view, and modify files with just an Internet connection. There's no software to install, no servers to maintain...ever!
+            <p style="color: #0c5460"><b>Online Document Management System</b> solution streamlines your document management processes. Secure online file storage capabilities let you store and organize documents online and access them where ever you are. You can share documents online and collaborate on them with colleagues, students and partners. Online document management and document collaboration let you store, organize, view, and modify files with just an Internet connection. There's no software to install, no servers to maintain...ever!
 			online document management system at a fraction of the time and cost of traditional document management software. Our effective document manager solution is low-cost, hassle-free, scalable, and secure.
 			Document management software allows files to be stored, organized, and modified seamlessly. Professionals need better document management capabilities to streamline document creation, review, and sharing processes. Get an all-in-one document solution for your business and save time and money.</p>
         
             </div>
             <div class="col-12 col-sm-4" id="login">
+               <% if(session.getAttribute("login_user1")==null&&session.getAttribute("login_user2")==null){
+       %>
                 <div class="modal-content">
                 <div class="modal-header" style="background: #724acf">
           <h4 class="modal-title">Login </h4>
@@ -82,6 +92,7 @@
           </form>
                     </div>
                 </div>
+           <% } %>
             </div>
         </div>
     </div>

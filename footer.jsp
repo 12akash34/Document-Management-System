@@ -3,7 +3,7 @@
       <div class="row">
         <div class="col-4 col-sm-3">
           <h4>About us</h4>
-          <p>Online Document Management System solution streamlines your document management processes. Secure online file storage capabilities let you store and organize documents online and access them where ever you are.</p>
+          <p>Online Document Management System solution streamlines your document management processes.</p>
         </div>
         <div class="col-3 col-sm-2">
           <h4>Links</h4>
@@ -17,7 +17,7 @@
         <div class="col-5 col-sm-4">
           <h4>Our Address</h4>
           <address class="address">Vidyalankar Institute of Technology,<br>
-            Vidyalankar Marg,<br>Wadala (E),<br>Mumbai-400 037<br>
+            Wadala (E),<br>Mumbai-400 037<br>
             <a href="#"><i class="bi bi-telephone-fill"></i></a>:+9198765XXXXX<br>
           </address>
         </div>
@@ -32,8 +32,7 @@
       </div>
         <div class="row justify-content-center pt-1" id="copyright">
         <div class="col-auto">
-          <p class="p-small">
-            © 2021 DocSpace - Document Management System
+            <p style="opacity:0.8"><small>© 2021 DocSpace - Document Management System</small>
           </p>
         </div>
       </div>

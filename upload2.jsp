@@ -25,11 +25,13 @@
     String descrip=request.getParameter("des");
     int version=Integer.parseInt(request.getParameter("ver"));
     String faculty=request.getParameter("fac");
+    String domain=request.getParameter("dom");
     
     session.setAttribute("dname",dname);
     session.setAttribute("descrip",descrip);
     session.setAttribute("version",version);
     session.setAttribute("faculty",faculty);
+    session.setAttribute("domain",domain);
     
 %>
 
@@ -68,7 +70,11 @@
               <div class="form-group px-1">
                 <label for="sel">Faculty</label>
                 <input class="form-control form-control-sm mr-1" type="text" name="fac" id="sel" value="<%=faculty %>" disabled>
-              </div>  
+              </div>
+              <div class="form-group px-1">
+                <label for="sel">Domain</label>
+                <input class="form-control form-control-sm mr-1" type="text" name="dom" id="dom" value="<%=domain %>" disabled>
+              </div>
             </div>
           </form>
               <form method="post"  action="uploadFile.jsp" name="form2" enctype="multipart/form-data">

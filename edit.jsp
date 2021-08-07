@@ -23,6 +23,8 @@
 	Class.forName("com.mysql.jdbc.Driver");
 	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/"+"docSpace","root","");
 	Statement st=con.createStatement();
+        Statement st1=con.createStatement();
+        Statement st3 =con.createStatement();
 	String fn,ln,user,eid,city,phno;
         fn=ln=user=eid=city=phno="";
         if(session.getAttribute("login_user1")!=null){
@@ -52,34 +54,53 @@
 				<tr>
 					 <td>First name :</td>
 					 <td><input type="text" name="fn" maxlength="15"  value="<%=fn%>"/></td>
-					 <td><p id="f1"></p></td>
+					 
 				</tr>
 				<tr>
 				        <td>Last name :</td>
 					<td><input type="text" name="ln" maxlength="15" value="<%=ln%>"/></td>
-					<td><p id="f2"></p></td>
+					
 				</tr>
 				<tr>
 					<td>User ID :</td>
 					<td><input type="text" name="uid" maxlength="10" disabled="disabled" value="<%=user%>"/></td>
-					<td><p id="f3"></p></td>
+					
 				</tr>
 				
 				<tr>
 				        <td>Email ID :</td>
 					<td><input type="text" name="eid" maxlength="20" value="<%=eid%>"/></td>
-					<td><p id="f5"></p></td>
+					
 				</tr>
 				<tr>
 					<td>City :</td>
 					<td><input type="text" name="city" maxlength="10" value="<%=city%>"></td>
-					<td><p id="f6"></p></td>
+					
 				</tr>
 				<tr>
 					<td>Mobile :</td>
 					<td><input type="text" name="phone" maxlength="12" value="<%=phno%>"/></td>
-					<td><p id="f7"></p></td>
+					
 				</tr>
+                                <% if(session.getAttribute("login_user1")!=null){
+                                    ResultSet rs1=st1.executeQuery("select distinct domain_n from domain_expertise where faculty='"+uid+"'");
+                                    %>
+                                    <tr>
+                                        <td>Domains :</td>
+                                        <td><p><% while(rs1.next()){ out.print(rs1.getString("domain_n")+". "); } %></p>
+                                            Add new Domain :(Use Ctrl button or drag mouse to select multiple)<br>
+                                            <select name="dom" multiple>
+                                                <% ResultSet rs3=st3.executeQuery("select domain_n from domain where domain_n not in (select distinct domain_n from domain_expertise where faculty='"+uid+"')");
+                                                while(rs3.next()){
+                                                    %>
+                                               
+                                                <option value="<%=rs3.getString("domain_n") %>"><% out.print(rs3.getString("domain_n")); %></option>
+                                            <% } %>
+                                            </select>
+                                        </td>
+                                    </tr> 
+                                    
+                             <%   } %>
 				
                                 <tr><td></td>
                                     <td><button type="reset" value="cancel"/>Reset

@@ -23,6 +23,7 @@
 	Class.forName("com.mysql.jdbc.Driver");
 	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/"+"docSpace","root","");
 	Statement st=con.createStatement();
+        Statement st1=con.createStatement();
         String fn,ln,user,eid,city,phno;
         fn=ln=user=eid=city=phno="";
         if(session.getAttribute("login_user1")!=null){
@@ -81,6 +82,16 @@
 					<td><%=phno%></td>
 					
 				</tr>
+                                <% if(session.getAttribute("login_user1")!=null){
+                                    ResultSet rs1=st1.executeQuery("select distinct domain_n from domain_expertise where faculty='"+uid+"'");
+                                    %>
+                                    <tr>
+                                        <td>Domains :</td>
+                                        <td><% while(rs1.next()){ out.print(rs1.getString("domain_n")+". "); } %>
+                                            
+                                        </td>
+                                    </tr>  
+                             <%   } %>
 								<tr>
 				        <td><input type="submit" value="edit"/>
 				</td>
