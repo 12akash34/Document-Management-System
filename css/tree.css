@@ -11,7 +11,7 @@
 }
 #myUL li {
     border: 1px solid #4eb14e;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 .nested li {
     background-color: #4eb14e;
