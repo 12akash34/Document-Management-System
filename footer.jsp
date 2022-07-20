@@ -16,8 +16,8 @@
         </div>
         <div class="col-5 col-sm-4">
           <h4>Our Address</h4>
-          <address class="address">Vidyalankar Institute of Technology,<br>
-            Wadala (E),<br>Mumbai-400 037<br>
+          <address class="address">V-DocSpace,<br>
+            DocSpace Road,<br>Mumbai<br>
             <a href="#"><i class="bi bi-telephone-fill"></i></a>:+9198765XXXXX<br>
           </address>
         </div>
@@ -32,7 +32,7 @@
       </div>
         <div class="row justify-content-center pt-1" id="copyright">
         <div class="col-auto">
-            <p style="opacity:0.8"><small>© 2021 DocSpace - Document Management System</small>
+            <p style="opacity:0.8"><small>ï¿½ 2021 DocSpace - Document Management System</small>
           </p>
         </div>
       </div>
